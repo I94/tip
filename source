@@ -1,0 +1,70 @@
+import wx
+
+class devon (wx.Frame):
+
+        def __init__(self,parent,  id ):
+                wx.Frame.__init__(self, parent, id, 'Tipper', size =(300,200))
+                panel=wx.Panel(self)
+
+                ppl=wx.TextEntryDialog(None, 'How many people are paying the tip?', 'People','Enter Number')
+                if ppl.ShowModal()==wx.ID_OK:
+                        nppl=ppl.GetValue()
+
+                bill=wx.TextEntryDialog(None, 'How much was the bill?','Bill', 'Enter Amount')
+                if bill.ShowModal()==wx.ID_OK:
+                        billa=bill.GetValue()
+                rate=wx.TextEntryDialog(None, 'Rate your server: 1-10', 'Service', 'Enter Rating')
+                if rate.ShowModal()==wx.ID_OK:
+                        rater=rate.GetValue()
+
+                billa=float(billa)
+                rater=float(rater)
+                nppl=float(nppl)
+
+                bad=billa*.10/nppl
+                ok=billa*.15/nppl
+                good=billa*.20/nppl
+                great=billa*.25/nppl
+                perfect=billa*.30/nppl
+
+                badf='%.2f'%bad
+                okf='%.2f'%ok
+                goodf='%.2f'%good
+                greatf='%.2f'%great
+                perfectf='%.2f'%perfect
+
+
+                perans='Tip $ %s'
+                parans='Tip $ %s each'
+                if rater < 3  or rater ==3 and nppl ==1:
+                        wx.StaticText(panel, -1,perans%badf,(10,10))
+                elif rater < 3 or rater ==3 and nppl >1:
+                        wx.StaticText(panel, -1, parans%badf, (10,10))
+                elif rater <6 or rater ==6 and rater >3 and nppl ==1:
+                        wx.StaticText(panel, -1,perans%okf,(10,10))
+                elif rater <6 or rater ==6 and rater >3 and nppl >1:
+                        wx.StatixText(panel, -1, parans%okf, (10,10))
+                elif rater <8 or rater ==8 and rater >6 and nppl==1:
+                        wx.StaticText(panel, -1, perans%goodf, (10,10))
+                elif rater <8 or rater ==8 and rater >6 and nppl >1:
+                        wx.StaticText(panel, -1, parans%goodf, (10,10))
+                elif rater ==9 and nppl==1:
+                        wx.StaticText(panel, -1, perans%greatf, (10,10))
+                elif rater ==9 and nppl >1:
+                        wx.StaticText(panel, -1, parans%greatf, (10,10))
+                elif rater ==10 and nppl ==1:
+                        wx.StaticText(panel, -1, perans%perfectf, (10,10))
+                elif rater ==10 and nppl >1:
+                        wx.StaticText(panel, -1, parans%perfectf, (10,10))
+
+if __name__=='__main__':
+        app=wx.PySimpleApp()
+        frame=devon(parent=None, id=-1)
+        frame.Show()
+        app.MainLoop()
+
+
+
+
+
+        
